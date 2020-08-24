@@ -1,4 +1,4 @@
-const ymId = "" //номер счетчика метрики
+const ymId = "12345678" //номер счетчика метрики
 
 const reachGoal = (target, description) => {
 	window[`yaCounter${ymId}`].reachGoal(`${target}_${description}`)//тильдовская ф-я метрики
@@ -18,30 +18,29 @@ const showChasing = () => {//обвести прослушиваемые эле�
 		item.selectors.forEach(selector => {
 			let elem = document.querySelector(selector)
 			elem.style.boxShadow = "0 0 0 5px red"
-			elem.title = `${item.human.block} — ${targets[item.goal.target]}: ${item.human.description}\n${item.goal.target}_${item.goal.description}`
+			elem.title = `${targets[item.goal.target]}: ${item.human.description}\n${item.goal.target}_${item.goal.description}`
 		})
 	})
 }
 
 let vidoeMouseOverState = {}//тут хранится состояния мыши над видосами
 
-let chase = [//прослушиваемые элементы
+let chase = [
 	{
-		human: {//для человека
-			description: "Преимущества",
-			block: "Хэдер",
+		human: {
+			description: "Заказать сайт в хэдере",
 		},
 		goal: {
-			target: "anchor",//короткое название таргета (см. targets)
-			description: "AdvantagesHeader",
+			target: "button",
+			description: "order_site"
 		},
-		selectors: [//1 и более селекторов элемента
-			"BODY>:nth-child(1)>:nth-child(3)>:nth-child(2)>:nth-child(1)>:nth-child(19)>:nth-child(1)",
-		]
+		selectors: [
+			"#nav221914254 a[href='#contacts']",
+		],
 	},
-]
+];
 
-$(window).on("load", () => {
+$(document).ready(() => {//$(window).on("load", () => {
 	chase.forEach(item => {
 		if (item.goal.target !== "video") {
 			item.selectors.forEach(selector => {
